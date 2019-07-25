@@ -814,7 +814,8 @@ def convert_to_original_colors(content_img, stylized_img):
   dst = preprocess(dst)
   return dst
 
-def render_single_image():
+def render_single_image(args):
+  global args
   content_img = get_content_image(args.content_img)
   style_imgs = get_style_images(content_img)
   with tf.Graph().as_default():
@@ -825,7 +826,8 @@ def render_single_image():
     tock = time.time()
     print('Single image elapsed time: {}'.format(tock - tick))
 
-def render_video():
+def render_video(args):
+  global args
   for frame in range(args.start_frame, args.end_frame+1):
     with tf.Graph().as_default():
       print('\n---- RENDERING VIDEO FRAME: {}/{} ----\n'.format(frame, args.end_frame))

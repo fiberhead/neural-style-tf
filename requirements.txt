@@ -1,0 +1,7 @@
+requests
+flask
+scikit-image
+Pillow
+tensorflow-gpu
+scipy
+opencv-python
