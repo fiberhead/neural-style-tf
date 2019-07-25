@@ -19,5 +19,5 @@ echo "http://$(curl ifconfig.io):5000" && docker run -p 5000:5000 -d neural-styl
 
 Calling the API
 ```console
-curl -X POST "http://MY_SUPER_API_IP:5000/process" -H "accept: image/*" -H "Content-Type: application/json" -d '{"url":"https://i.ibb.co/BGHyHjc/input.png"}' --output styled_image.png
+curl -X POST "http://MY_SUPER_API_IP:5000/process" -H "accept: image/*" -H "Content-Type: application/json" -d '{"url":"https://i.ibb.co/BGHyHjc/input.png", "style": "the_scream"}' --output styled_image.png
 ```
