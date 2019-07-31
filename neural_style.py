@@ -827,8 +827,9 @@ def render_single_image(arg):
     tock = time.time()
     print('Single image elapsed time: {}'.format(tock - tick))
 
-def render_video(args):
+def render_video(arg):
   global args
+  args = arg
   for frame in range(args.start_frame, args.end_frame+1):
     with tf.Graph().as_default():
       print('\n---- RENDERING VIDEO FRAME: {}/{} ----\n'.format(frame, args.end_frame))
