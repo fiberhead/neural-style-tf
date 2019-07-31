@@ -547,7 +547,11 @@ def check_image(img, path):
   rendering -- where the magic happens
 '''
 def stylize(content_img, style_imgs, init_img, frame=None):
-  with tf.device(args.device), tf.Session() as sess:
+  tf.device(args.device)
+  config = tf.ConfigProto()
+  config.gpu_options.allow_growth=True
+  session = tf.Session(config=config) 
+  with session as sess:
     # setup network
     net = build_model(content_img)
     
@@ -826,6 +830,7 @@ def render_single_image(arg):
     stylize(content_img, style_imgs, init_img)
     tock = time.time()
     print('Single image elapsed time: {}'.format(tock - tick))
+
 
 def render_video(arg):
   global args

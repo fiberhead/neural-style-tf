@@ -25,7 +25,7 @@ from app_utils import get_multi_model_bin
 import shutil
 
 from neural_style import render_single_image
-
+from multiprocessing import Pool
 
 try:  # Python 3.5+
     from http import HTTPStatus
@@ -53,7 +53,6 @@ def process():
     try:
         url = request.json["url"]
         style = request.json["style"]
-        print(style)
         download(url, input_path)
 
         img_output_dir, img_name = os.path.split(output_path)
@@ -90,9 +89,12 @@ def process():
                 optimizer='lbfgs',
                 color_convert_type='yuv'
                 )
-       
-        render_single_image(args) 
+        #TF I hate the way you manage GPU memory !!!
+        with Pool(1) as p:
+          p.apply(render_single_image, (args,))
+
         callback = send_file(os.path.join(img_output_dir, args.img_name, img_name), mimetype='image/png')
+
 
         return callback, 200
 
