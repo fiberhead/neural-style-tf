@@ -814,8 +814,9 @@ def convert_to_original_colors(content_img, stylized_img):
   dst = preprocess(dst)
   return dst
 
-def render_single_image(args):
+def render_single_image(arg):
   global args
+  args = arg
   content_img = get_content_image(args.content_img)
   style_imgs = get_style_images(content_img)
   with tf.Graph().as_default():
