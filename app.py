@@ -73,10 +73,10 @@ def process():
         content_img_dir, content_img = os.path.split(input_path)
         args = Args(
                 content_img=content_img,
-		content_img_dir=content_img_dir,
+                content_img_dir=content_img_dir,
                 img_output_dir=img_output_dir,
                 img_name=os.path.splitext(img_name)[0],
-		style_imgs_dir="/src/styles/",
+                style_imgs_dir="/src/styles/",
                 style_imgs=[style+'.jpg'],
                 max_size=1000,
                 max_iterations=100,
