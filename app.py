@@ -39,6 +39,11 @@ except ImportError:
 app = Flask(__name__)
 
 
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
 class Args:
     def __init__(self, **kwds):
         self.__dict__.update(kwds)
@@ -51,9 +56,18 @@ def process():
     output_path = generate_random_filename(upload_directory,"png")
 
     try:
-        url = request.json["url"]
-        style = request.json["style"]
-        download(url, input_path)
+        if 'file' in request.files:
+            file = request.files['file']
+            if allowed_file(file.filename):
+                file.save(input_path)
+
+            style = request.form.getlist('style')[0]
+
+        else:
+            url = request.json["url"]
+            download(url, input_path)
+            style = request.json["style"]
+
 
         img_output_dir, img_name = os.path.split(output_path)
         content_img_dir, content_img = os.path.split(input_path)
@@ -112,6 +126,8 @@ def process():
 
 if __name__ == '__main__':
     global upload_directory, weight_file
+    global ALLOWED_EXTENSIONS
+    ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
     upload_directory = '/src/upload/'
     create_directory(upload_directory)
