@@ -135,7 +135,7 @@ if __name__ == '__main__':
     weight_directory = '/src/'
     weight_file = 'imagenet-vgg-verydeep-19.mat'
 
-    url_prefix = 'http://pretrained-models.auth-18b62333a540498882ff446ab602528b.storage.gra5.cloud.ovh.net/image/neural-style-tf/'
+    url_prefix = 'http://pretrained-models.auth-18b62333a540498882ff446ab602528b.storage.gra.cloud.ovh.net/image/neural-style-tf/'
 
     get_model_bin(url_prefix + weight_file , weight_directory + weight_file)
 
